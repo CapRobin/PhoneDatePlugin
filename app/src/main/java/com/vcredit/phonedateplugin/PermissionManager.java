@@ -143,7 +143,6 @@ public class PermissionManager {
         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         intent.setData(Uri.parse(PACKAGE_URL_SCHEME + mContext.getPackageName()));
         mContext.startActivity(intent);
-//        mContext.startActivity(new Intent(Settings.ACTION_SETTINGS));
     }
 
 
@@ -157,16 +156,8 @@ public class PermissionManager {
         builder.setNegativeButton("退出", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-//                SupportAppManager.get().loginOutFinishActivity2();
             }
         });
-
-//        builder.setPositiveButton(R.string.settings, new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                startAppSettings(mContext);
-//            }
-//        });
 
         builder.setCancelable(false);
 
