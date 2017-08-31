@@ -1,0 +1,56 @@
+apply plugin: 'com.android.library'
+apply plugin: 'bintray-release'//添加
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    allprojects{
+        //加上这些
+        tasks.withType(Javadoc) {
+            options{ encoding "UTF-8"
+                charSet 'UTF-8'
+                links "http://docs.oracle.com/javase/7/docs/api"
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        disable 'InvalidPackage'
+        checkReleaseBuilds false //设置在release版本的时候也关闭错误
+        abortOnError false  //设置是否在lint发生错误时终止构建为false
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    testCompile 'junit:junit:4.12'
+}
+
+
+publish {
+    userOrg = 'zewsummer2009'      //bintray注册的用户名
+    groupId = 'com.vcredit'         //compile引用时的第1部分groupId
+    artifactId = 'zew'     //compile引用时的第2部分项目名
+    publishVersion = '1.0.0'    //compile引用时的第3部分版本号
+    desc = 'This is a vcreditlib '
+    website = 'https://github.com/wzgiceman/Rxbus'
+}
